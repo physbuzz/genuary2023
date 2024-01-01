@@ -8,23 +8,24 @@
 - Searchability: Each program has to be written with searchability in mind. 
 
 By "searchability" think Wolfram rule 30; you create an algorithm that can be run on 256 possible rules, then plot them all and pick out the most interesting ones. This can be as simple as a "--quick" flag.
+
 ## Other modifiers
-[ ] Render using Blender's renderer
-[ ] Render using Mitsuba 3
-[ ] Incorporate charm.sh
-[ ] Create a Docker image of a project and run it on a hosting service
-[ ] Incorporate CUDA
-[ ] Write a program which saves from or loads to OpenVDB
-[ ] Postprocess a video using ffmpeg filters
-[ ] Use >32gb of memory (either RAM + hard drive or RAM)
-[ ] Use >10gb of vram
-[ ] Try to get the highest quality .gif output that Twitter will allow.
-[ ] Render a limit set (if your image is 640x480, make it so that turning the quality of your Simulation/generation up does not change the output at all)
-[ ] Chain two or more days' code together into a new project 
-[ ] Incorporate an LLM feedback mechanism
-[ ] Incorporate sound on a different day than Jan 31
-[ ] Publish a day as an interactive applet
-[ ] Incorporate automatic differentiation
+- [ ] Render using Blender's renderer
+- [ ] Render using Mitsuba 3
+- [ ] Incorporate charm.sh
+- [ ] Create a Docker image of a project and run it on a hosting service
+- [ ] Incorporate CUDA
+- [ ] Write a program which saves from or loads to OpenVDB
+- [ ] Postprocess a video using ffmpeg filters
+- [ ] Use >32gb of memory (either RAM + hard drive or RAM)
+- [ ] Use >10gb of vram
+- [ ] Try to get the highest quality .gif output that Twitter will allow.
+- [ ] Render a limit set (if your image is 640x480, make it so that turning the quality of your Simulation/generation up does not change the output at all)
+- [ ] Chain two or more days' code together into a new project 
+- [ ] Incorporate an LLM feedback mechanism
+- [ ] Incorporate sound on a different day than Jan 31
+- [ ] Publish a day as an interactive applet
+- [ ] Incorporate automatic differentiation
 
 # Days
 
