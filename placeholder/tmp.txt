@@ -1,0 +1,31 @@
+JAN. 01: Particles, lots of them.
+JAN. 02: No palettes. Generative colors, procedural colors, emergent colors.
+JAN. 03: [Droste effect](https://en.wikipedia.org/wiki/Droste_effect)
+JAN. 04: Pixels
+JAN. 05: In the style of [Vera Molnár](https://en.wikipedia.org/wiki/Vera_Moln%C3%A1r)
+JAN. 06: Screensaver
+JAN. 07: Progress bar / indicator / loading animation
+JAN. 08: Chaotic system
+JAN. 09: ASCII
+JAN. 10: Hexagonal
+JAN. 11: In the style of [Anni Albers](https://en.wikipedia.org/wiki/Anni_Albers)
+JAN. 12: Lava lamp
+JAN. 13: Wobbly function day
+JAN. 14: Less than 1KB artwork
+JAN. 15: Use a physics library
+JAN. 16: Draw 10 000 of something
+JAN. 17: Inspired by Islamic art
+JAN. 18: [Bauhaus](https://en.wikipedia.org/wiki/Bauhaus)
+JAN. 19: Flocking
+JAN. 20: Generative typography
+JAN. 21: Use a library that you haven’t used before
+JAN. 22: Point - line - plane
+JAN. 23: 128×128
+JAN. 24: Impossible objects (undecided geometry)
+JAN. 25: “I should try to recreate this with code”. Today is the day.
+JAN. 26: Grow a seed.
+JAN. 27: Code for one hour. At the one hour mark, you’re done.
+JAN. 28: Skeuomorphism. "Skeumorphs employ elements that, while essential to the original object, serve no pragmatic purpose in the new system."
+JAN. 29: Signed Distance Functions
+JAN. 30: Shaders
+JAN. 31: Generative music / Generative audio / Generative sound.
