@@ -32,6 +32,8 @@ By "searchability" think Wolfram rule 30; you create an algorithm that can be ru
 #### JAN. 01: Particles, lots of them.
 ![Day 1](day01/day01.png)
 
+[(Hi rez)](day01/day01hirez.png)
+
 Circle packing! More specifically, the [hard disk model](http://www.sklogwiki.org/SklogWiki/index.php/Hard_disk_model).
 
 I have 160,000 hard disks (overlapping not allowed). If these are sampled
