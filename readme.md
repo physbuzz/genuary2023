@@ -1,7 +1,7 @@
 # David's Genuary 2024
 > GENUARY is an artificially generated month of time where we build code that makes beautiful things. 
 
-## David's Modifiers
+## David's Constraints
 - Laptop dev environment: Each program has to run on an external server from a laptop.
 - Configurability: Each program has to take CLI arguments with a large input parameter space.
 - Documentation: Each argument needs a description and sensible error handling.
@@ -32,21 +32,24 @@ By "searchability" think Wolfram rule 30; you create an algorithm that can be ru
 #### JAN. 01: Particles, lots of them.
 ![Day 1](day01/day01.png)
 
-Circle packing! 
+Circle packing! More specifically, the [hard disk model](http://www.sklogwiki.org/SklogWiki/index.php/Hard_disk_model).
 
 I have 160,000 hard disks (overlapping not allowed). If these are sampled
 via equipartition (every valid state is equally likely), then there's a famous
-phase transition that occurs. Instead of temperature, we have the packing fraction eta. For a close-packed arrangement eta0=pi\*sqrt(3)/6 ~= 0.9, for a square
-lattice packing eta=pi/4~=0.79, and as you lower eta you go from long-range order to disorder. Actually, this phase transition happens somewhere around eta=0.66(cf Alder and Wainwright 1962, Phase Transition in Elastic Disks. They talk in terms of A/A0~=1.33 which is equal to eta0/eta in my notation.) 
+phase transition that occurs. Instead of temperature, we have the packing fraction eta. For a close-packed arrangement 
+$\eta_0=\pi\sqrt{3}/6\approx 0.9$, for a square
+lattice packing $\eta=\pi/4\approx 0.79$, and as you lower eta you go from long-range order to disorder. Actually, there's
+a really rich structure of phases which is described in [this paper by Bernard and Krauth (2011)](https://arxiv.org/abs/1102.4094) but which I wouldn't do justice here. Interesting stuff happens for $0.7<\eta<0.72$ and above this you get hexagonal close packing -ish structure.
 
-For plotting, I use a method which I swear I saw in a Coursera course by 
-Werner Krauth, but I haven't been able to find it again! Basically if you have a hexagonal close-packed lattice, you can rotate it by some angle $\theta\in [0,2\pi/6)$. It would be nice to have a way to get this theta for some nearly
-close-packed cluster of points, and then if we colored by this theta we should
-be able to see clusters with long-range order being approximately the same color. In the hexagonal close packing case, given some point $i$ at location $z_i$ treated as a complex number, we 
-perform the sum over the closest neighbors: $\sum_j ((z_j-z_i)/(2r))^6$. This is guaranteed to be equal to $6e^{i\theta}$ (in the closest packing case). 
-So I messed around with sums like this until I got a decent color function.
+For plotting, I essentially used the method in the Bernard and Krauth paper, finding $\Psi_j$. Basically if you have a hexagonal close-packed lattice, you can rotate it by some angle $\theta\in [0,2\pi/6)$. 
+Represent a particle's position as a complex number $z_i$. Then in the closest packed arrangement,
+$e^{6\theta}=\frac{1}{6}\sum_j ((z_j-z_i)/(2r))^6$, where the sum is taken over the six neighboring particles of $z_i$.
+Basically, you can mess with functions like that summation in order to get at theta, which will give a constant color to
+regions of particles which are all "in the same lattice".
 
 My C++ code is Bad with a capital B today, and I didn't get as far as writing command line arguments and all that. But OK, first I'll do it poorly, then I'll do it well :)
+
+I'm leaving the code as-is for now, though I have to go back and make sure it satisfies the constraints I've set for myself.
 
 #### JAN. 02: No palettes. Generative colors, procedural colors, emergent colors.
 ![placeholder 2](placeholder/day02placeholder.png)

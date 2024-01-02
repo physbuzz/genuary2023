@@ -207,7 +207,7 @@ void saveImage(PGrid<float,2> &s,ParticleList<float,2> &pl,float radius, float f
     //outimg.save("output2.bmp");
 }
 
-int main(){
+int main() {
 
     int nparticles=160000;
     int xdim=std::floor(std::sqrt(nparticles));
@@ -236,6 +236,7 @@ int main(){
 
     
 
+    /*
     float ratio=0;
     for(int i=0;i<=1000000;i++){
         ratio+=updateOnce(s,fract*radius,0.1*radius);
@@ -245,7 +246,7 @@ int main(){
         }
     }
     cout<<"Acceptance ratio: "<<(ratio/10000)<<endl;
-    pl.save("particle160k.txt");
+    pl.save("particle160k.txt");*/
 
     //saveImage(s,pl,radius,fract);
 
