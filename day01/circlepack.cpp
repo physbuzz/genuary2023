@@ -8,6 +8,19 @@
 #include "PGrid.h"
 #include "ImageUtil.h"
 
+//Some string manipulation functions for saving files. pad_int(1234,5) returns "01234".
+std::string pad_int(int arg, int padcount) {
+    std::stringstream ss;
+    ss << std::setfill('0') << std::setw(padcount) << arg;
+    return ss.str();
+}
+
+//Returns a file name in the form of "prefix00###suffix". For example "image0032.bmp"
+std::string getFilename(std::string prefix, int num, int padcount, std::string suffix) {
+    return prefix + pad_int(num, padcount) + suffix;
+}
+
+
 using namespace std;
 
 
@@ -62,48 +75,6 @@ float updateOnce(PGrid<float,2> &s,float radius,float deltasize){
         }
     } 
     return float(naccept)/nproposed;
-    /*
-    for(size_t aind=0;aind<s.idarr.size();aind++){
-        if(s.idarr[aind].size()==0)
-            continue;
-        VectorND<int,2> avec=s.indexToIntvector(aind);
-        
-        //for each particle in the current cell
-        for(size_t p1ind=0;p1ind<s.idarr[aind].size();p1ind++){
-            Particle<float,2> *p1=&((*s.plist)[s.idarr[aind][p1ind]]);
-
-
-            VectorND<float,2> posprop=p1->pos+VectorND<float,2>({
-                    ((rand()*2.0)/RAND_MAX-1.0)*dx,
-                    ((rand()*2.0)/RAND_MAX-1.0)*dx});
-            bool accept=true;
-
-            //loop over all adjacent cells
-            for(int dx=-1;dx<=1 && accept;dx++){
-                for(int dy=-1;dy<=1 && accept;dy++){
-                    if(avec[0]+dx<0
-                            ||avec[0]+dx>=s.numCells[0]
-                            ||avec[1]+dy<0
-                            ||avec[1]+dy>=s.numCells[1])
-                        continue;
-
-                    //loop over the particles in the adjacent cells
-                    int bind=s.intvectorToIndex(s.indexToIntvector(aind)+VectorND<int,2>({dx,dy}));
-                    for(size_t p2ind=0;p2ind<s.idarr[bind].size();p2ind++){
-                        Particle<float,2> *p2=&((*s.plist)[s.idarr[bind][p2ind]]);
-                        if(p1==p2)
-                            continue;
-
-
-                        if((posprop-p2->pos).length2<4*radius2)
-                            accept=false;
-
-                    }
-                }
-            }
-        }
-    } */
-    //cout<<"npairs: "<<npairs<<endl;
 }
 
 /* For a hexagonal closest packing, the distance to the nearest neighbor is 2*r,
@@ -124,43 +95,9 @@ float smoothWindow(float distance, float r){
     return (x-x1)*(x-x1)*(2*x-3*x0+x1)/((x1-x0)*(x1-x0)*(x1-x0));
 }
 
-int main(){
 
-    int nparticles=10000;
-    int xdim=std::floor(std::sqrt(nparticles));
-    ParticleList<float,2> pl;
-    float radius=0.5f/xdim;
-
-    if(!pl.load("particletest.txt")){
-        pl.initializeGrid(xdim,2*radius);
-        cout<<"Creating grid from scratch."<<endl;
-    } else {
-        cout<<"Loading existing grid."<<endl;
-    }
-
-    
-    /*for(auto p : pl.plist){
-        cout<<p.pos<<endl;
-    }*/
-    
-    PGrid<float,2> s(&pl.plist,VectorND<float,2>(1.0f),2.0*radius);
-
-    s.rebuildGrid();
-
-    
-
-    /*
-    float ratio=0;
-    for(int i=0;i<100000;i++){
-        ratio+=updateOnce(s,0.9*radius,0.1*radius);
-        if(i%50000==0){
-            cout<<"On step "<<i<<endl;
-        }
-    }
-    cout<<"Acceptance ratio: "<<(ratio/1000)<<endl;
-    pl.save("particletest.txt");*/
-
-    float drawR=radius*0.9;
+void saveImage(PGrid<float,2> &s,ParticleList<float,2> &pl,float radius, float fract, int fnamei){
+    float drawR=radius*fract;
 
     std::vector<int> colors(pl.plist.size(),0);
     for(int p1ind=0;p1ind<pl.plist.size();p1ind++) {
@@ -266,7 +203,52 @@ int main(){
         }
     }
     std::cout<<"Done, saving."<<std::endl;
-    outimg.save("output1.bmp");
+    outimg.save(getFilename("progress",fnamei,4,".bmp"));
+    //outimg.save("output2.bmp");
+}
+
+int main(){
+
+    int nparticles=160000;
+    int xdim=std::floor(std::sqrt(nparticles));
+    ParticleList<float,2> pl;
+    float radius=0.5f/xdim;
+
+    if(!pl.load("particle160k.txt")){
+        pl.initializeGrid(xdim,2*radius);
+        cout<<"Creating grid from scratch."<<endl;
+    } else {
+        cout<<"Loading existing grid."<<endl;
+    }
+
+    float fract=0.935f;
+
+    cout<<"Packing fraction "<<(pl.plist.size()*M_PI*fract*fract*radius*radius)<<endl;
+
+    
+    /*for(auto p : pl.plist){
+        cout<<p.pos<<endl;
+    }*/
+    
+    PGrid<float,2> s(&pl.plist,VectorND<float,2>(1.0f),2.0*radius);
+
+    s.rebuildGrid();
+
+    
+
+    float ratio=0;
+    for(int i=0;i<=1000000;i++){
+        ratio+=updateOnce(s,fract*radius,0.1*radius);
+        if(i%5000==0){
+            cout<<"On step "<<i<<endl;
+            saveImage(s,pl,radius,fract,(i/5000));
+        }
+    }
+    cout<<"Acceptance ratio: "<<(ratio/10000)<<endl;
+    pl.save("particle160k.txt");
+
+    //saveImage(s,pl,radius,fract);
+
     /*
     int imw=3840;
     int imh=2160;
