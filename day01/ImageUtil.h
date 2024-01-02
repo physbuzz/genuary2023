@@ -20,6 +20,15 @@ int floatToRGB(double r,double g,double b,double a=0){
 	return (a1<<24)|(r1<<16)|(g1<<8)|b1;
 }
 
+inline 
+int intToRGB(int r,int g,int b,int a=0){
+	a=a>0?(a>255?255:a):0;
+	r=r>0?(r>255?255:r):0;
+	g=g>0?(g>255?255:g):0;
+	b=b>0?(b>255?255:b):0;
+	return (a<<24)|(r<<16)|(g<<8)|b;
+}
+
 //writes all the binary data given to a file.
 inline
 void writeCharFile(std::string name,std::vector<char> data){
